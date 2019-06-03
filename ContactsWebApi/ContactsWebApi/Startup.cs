@@ -33,7 +33,7 @@ namespace ContactsWebApi
             services.AddScoped<IContactService, ContactService>();
             services.AddDbContext<ContactsdbContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("LocalDB"));
+                opt.UseSqlServer(Configuration.GetConnectionString("AzureDB"));
             });
             
             services.AddMvc().AddJsonOptions(json =>
