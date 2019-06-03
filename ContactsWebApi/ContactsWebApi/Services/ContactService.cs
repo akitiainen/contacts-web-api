@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContactsWebApi.Models;
 using ContactsWebApi.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsWebApi.Services
 {
@@ -21,9 +22,13 @@ namespace ContactsWebApi.Services
             return _contactRepository.Create(contact);
         }
 
-        public void Delete(int id)
+        public StatusCodeResult Delete(int id)
         {
-            _contactRepository.Delete(id);
+            var deletedContact = _contactRepository.Read(id);
+            if (deletedContact == null)
+                throw new Exception("Contact not found");
+
+            return _contactRepository.Delete(id);
         }
 
         public List<Contact> Read()
@@ -40,13 +45,9 @@ namespace ContactsWebApi.Services
         {
             var updateContact = _contactRepository.Read(id);
             if (updateContact == null)
-            {
                 throw new Exception("Contact not found!");
-            }
-            else
-            {
-                return _contactRepository.Update(contact);
-            }
+
+            return _contactRepository.Update(contact);
         }
     }
 }

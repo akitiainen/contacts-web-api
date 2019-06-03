@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContactsWebApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsWebApi.Repositories
 {
@@ -12,6 +13,6 @@ namespace ContactsWebApi.Repositories
         List<Contact> Read();
         Contact Read(int id);
         Contact Update(Contact contact);
-        void Delete(int id);
+        StatusCodeResult Delete(int id);
     }
 }
